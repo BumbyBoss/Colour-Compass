@@ -2,58 +2,64 @@
 /* LOCATION: Colour-Compass/style.css */
 
 body {
-  font-family: "Merriweather", serif;
-  background-color: #fff;
   margin: 0;
   padding: 0;
-  color: #222;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #fff;
+  color: #333;
   text-align: center;
 }
 
 header {
-  padding: 1rem 0 0.5rem 0;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
 }
 
 .logo {
-  height: 80px;
-  margin-bottom: 0.5rem;
+  max-height: 80px;
+  display: block;
+  margin: 0 auto 0.5rem auto;
 }
 
 h1 {
+  margin: 0;
   font-size: 2rem;
-  margin: 0 0 1rem 0;
 }
 
 .instructions {
-  margin: 1rem auto;
-  font-size: 1rem;
-  max-width: 600px;
+  margin: 1.5rem auto;
   padding: 0 1rem;
+  max-width: 600px;
 }
 
 .selector {
   margin: 1rem auto 2rem auto;
 }
 
-select {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+label {
+  font-weight: bold;
+  margin-right: 0.5rem;
 }
 
-#display-area {
-  margin: 0 auto 2rem auto;
+select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  min-width: 220px;
+}
+
+.display-area {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 4px;
-  max-width: 300px;
+  align-items: center;
+  min-height: 400px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-.color-box {
-  width: 90px;
-  height: 90px;
-  background-color: #ccc;
-  border: 1px solid #999;
+.svg-display {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border: 1px solid #ccc;
 }
