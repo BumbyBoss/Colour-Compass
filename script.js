@@ -3,79 +3,76 @@
 
 let swatches = [];
 let selectedColours = {};
+let currentZones = [];
 
-const structure = {
-  grid: [], // last priority
+const layoutGroups = {
   diaper: ["Abrazo", "TraditionalDC", "Brief"],
   kidcrops: ["HemmedCrop", "HemmedEuroCrop", "DigsCrop", "CuffedCrop", "CuffedEuroCrop", "RuffleCrop"],
-  kidpants: ["HaremPants", "LeggingPants", "JoggersPants", "RufflePants", "HemmedPants", "CuffedPants", "EuroHemmedPants", "EuroCuffedPants", "EuroSweatPants", "BritchesPants", "FootiesPants", "BootcutPants"],
   kidshorts: ["HemmedShorts", "CuffedShorts", "RuffledShorts", "BloomerShorts", "Skirtie"],
+  kidpants: [
+    "HaremPants", "LeggingPants", "JoggersPants", "RufflePants",
+    "HemmedPants", "CuffedPants", "EuroHemmedPants", "EuroCuffedPants",
+    "EuroSweatPants", "BritchesPants", "FootiesPants", "BootcutPants"
+  ],
   sweater: [
     "CampfireSweater", "CardiganSweater", "CocoonSweater", "CrewNeckSweater",
     "HalfZipSweater", "HenleySweater", "ShawlNeckSweater", "SheepyHugSweater",
     "QuarterSweater", "Vest"
-  ]
+  ],
+  grid: ["BasicGrid"]
 };
 
-const mergedZones = (svg, groupId) => {
-  const zoneGroups = {
-    Cuff: ["Cuff", "LeftCuff", "RightCuff"],
-    Sleeve: ["LeftSleeve", "RightSleeve"],
-    SidePanel: ["LeftSidePanel", "RightSidePanel"],
-    Leg: ["LeftLeg", "RightLeg"],
-    Foot: ["LeftFoot", "RightFoot"],
-    Tab: ["LeftTab", "RightTab"]
-  };
-  const all = Array.from(svg.querySelectorAll(`#${groupId} *`));
-  const final = [];
-  const used = new Set();
+const layoutToZones = {
+  // This will be dynamically updated based on SVG structure.
+};
 
-  all.forEach(el => {
-    const id = el.id;
-    if (!id || used.has(id)) return;
+const layoutSelect = document.getElementById("layout-select");
+const groupSelect = document.getElementById("group-select");
+const zonesContainer = document.getElementById("zones-container");
+const displayArea = document.getElementById("display-area");
 
-    for (let label in zoneGroups) {
-      const group = zoneGroups[label];
-      if (group.some(g => id.includes(g))) {
-        if (!used.has(label)) {
-          final.push(label);
-          used.add(label);
-        }
-        used.add(id);
-        return;
-      }
-    }
-    final.push(id);
-    used.add(id);
+layoutSelect.addEventListener("change", () => {
+  const layout = layoutSelect.value;
+  if (!layout || !layoutGroups[layout]) {
+    groupSelect.style.display = "none";
+    groupSelect.previousElementSibling.style.display = "none";
+    zonesContainer.innerHTML = "";
+    displayArea.innerHTML = "";
+    return;
+  }
+
+  populateGroups(layout);
+  groupSelect.style.display = "block";
+  groupSelect.previousElementSibling.style.display = "block";
+});
+
+groupSelect.addEventListener("change", async () => {
+  const layout = layoutSelect.value;
+  const group = groupSelect.value;
+  if (!layout || !group) return;
+
+  await loadLayout(layout);
+  currentZones = getZoneIds(group);
+  createSwatchSelectors(currentZones);
+});
+
+const populateGroups = (layout) => {
+  groupSelect.innerHTML = '<option value="">-- Select Style --</option>';
+  layoutGroups[layout].forEach(group => {
+    const opt = document.createElement("option");
+    opt.value = group;
+    opt.textContent = group;
+    groupSelect.appendChild(opt);
   });
-  return final;
 };
 
-const loadLayout = async (layout) => {
-  const displayArea = document.getElementById("display-area");
-  displayArea.innerHTML = "";
-  try {
-    const res = await fetch(`resources/SVG/${layout}.svg`);
-    const svgText = await res.text();
-    displayArea.innerHTML = svgText;
-    document.querySelector("svg").classList.add("svg-display");
-  } catch (err) {
-    displayArea.innerHTML = `<p>Error loading layout: ${layout}</p>`;
-  }
+const getZoneIds = (group) => {
+  // Use consistent naming convention from SVG
+  return [...document.querySelectorAll(`#${group} > *`)].map(el => el.id);
 };
 
-const loadSwatches = async () => {
-  try {
-    const res = await fetch("swatches.json");
-    swatches = await res.json();
-  } catch (err) {
-    console.error("Failed to load swatches:", err);
-  }
-};
-
-const createSelectors = (zones, groupId) => {
-  const selectorSection = document.querySelector(".selector");
-  document.querySelectorAll(".swatch-row").forEach(row => row.remove());
+const createSwatchSelectors = (zones) => {
+  zonesContainer.innerHTML = "";
   selectedColours = {};
 
   zones.forEach((zoneId, index) => {
@@ -98,59 +95,49 @@ const createSelectors = (zones, groupId) => {
 
     select.addEventListener("change", (e) => {
       selectedColours[zoneId] = e.target.value;
-      applyColours(groupId);
+      applyColours();
     });
 
     row.appendChild(select);
-    selectorSection.appendChild(row);
+    zonesContainer.appendChild(row);
   });
 };
 
-const applyColours = (groupId) => {
+const applyColours = () => {
   const svg = document.querySelector("svg");
   if (!svg) return;
 
-  Object.entries(selectedColours).forEach(([zoneId, patternId]) => {
-    const zone = svg.getElementById(zoneId);
-    if (zone && patternId) {
-      zone.setAttribute("fill", `url(#${patternId})`);
+  currentZones.forEach(zoneId => {
+    const part = svg.getElementById(zoneId);
+    const patternId = selectedColours[zoneId];
+    if (part && patternId) {
+      part.setAttribute("fill", `url(#${patternId})`);
     }
   });
 };
 
-const categorySelect = document.getElementById("layout-select");
-const groupSelect = document.getElementById("group-select");
+const loadLayout = async (layout) => {
+  displayArea.innerHTML = "";
+  try {
+    const res = await fetch(`svg/${layout}.svg`);
+    const svgText = await res.text();
+    displayArea.innerHTML = svgText;
+    document.querySelector("svg").classList.add("svg-display");
+  } catch (err) {
+    displayArea.innerHTML = `<p>Error loading layout: ${layout}</p>`;
+  }
+};
 
-categorySelect.addEventListener("change", async (e) => {
-  const layout = e.target.value;
-  groupSelect.innerHTML = "<option disabled selected>Select a Style</option>";
-  document.querySelector(".selector").innerHTML = "";
+const loadSwatches = async () => {
+  try {
+    const res = await fetch("swatches.json");
+    swatches = await res.json();
+  } catch (err) {
+    console.error("Failed to load swatches:", err);
+  }
+};
 
-  await loadLayout(layout);
-  const svg = document.querySelector("svg");
-  if (!svg || !structure[layout]) return;
-
-  structure[layout].forEach(groupId => {
-    if (svg.getElementById(groupId)) {
-      const option = document.createElement("option");
-      option.value = groupId;
-      option.textContent = groupId.replace(/([A-Z])/g, ' $1').trim();
-      groupSelect.appendChild(option);
-    }
-  });
-
-  groupSelect.style.display = "block";
-});
-
-groupSelect.addEventListener("change", () => {
-  const selectedGroup = groupSelect.value;
-  const svg = document.querySelector("svg");
-  if (!svg) return;
-  const zones = mergedZones(svg, selectedGroup);
-  createSelectors(zones, selectedGroup);
-});
-
-// Download button logic (as PNG)
+// PNG export
 const downloadButton = document.getElementById("download-button");
 downloadButton.addEventListener("click", () => {
   const svgEl = document.querySelector("svg");
@@ -187,6 +174,7 @@ downloadButton.addEventListener("click", () => {
   img.src = url;
 });
 
+// Init
 (async () => {
   await loadSwatches();
 })();
