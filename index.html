@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bumby Wool – Colour Compass</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bumby Wool - Colour Compass</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
@@ -21,21 +21,28 @@
     <section class="selector">
       <label for="layout-select">Choose a layout:</label>
       <select id="layout-select">
-        <option value="grid">3x3 Colour Grid</option>
         <option value="diaper">Diaper Cover</option>
-        <option value="kidpants">Kid Pants</option>
         <option value="kidcrops">Kid Crops</option>
         <option value="kidshorts">Kid Shorts</option>
+        <option value="kidpants">Kid Pants</option>
         <option value="sweater">Sweater</option>
+        <option value="grid">3x3 Colour Grid</option>
       </select>
+
+      <label for="group-select" style="display:none;">Choose a Style:</label>
+      <select id="group-select" style="display:none;"></select>
     </section>
 
-    <section id="display-area" class="display-area"></section>
+    <div id="display-area"></div>
 
-    <section class="tools">
-      <input id="filename-input" type="text" placeholder="Name your plan" />
-      <textarea id="notes-input" placeholder="Add optional notes…"></textarea>
-      <button id="download-button">Download Preview</button>
+    <section class="export">
+      <label for="filename-input">Name your Colour Compass:</label>
+      <input type="text" id="filename-input" placeholder="My Custom Look">
+
+      <label for="notes-input">Add notes (optional):</label>
+      <textarea id="notes-input" placeholder="Ex: Match cuffs with hat colour"></textarea>
+
+      <button id="download-button">Download PNG</button>
     </section>
   </main>
 
