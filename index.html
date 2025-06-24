@@ -1,6 +1,3 @@
-<!-- FILE: index.html -->
-<!-- LOCATION: Colour-Compass/index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +14,8 @@
 
   <main>
     <section class="instructions">
-      <p>Select a garment or 3x3 grid to begin planning your colours. First selection will fill all zones. You can edit each one after. Hover/tap swatches to preview options.</p>
+      <p><strong>Welcome to the Bumby Colour Compass!</strong><br>
+      Explore our current colours and preview how they look together on different garment styles. Use the dropdown to select a layout and start customizing.</p>
     </section>
 
     <section class="selector">
@@ -32,10 +30,13 @@
       </select>
     </section>
 
-    <!-- 👇👇👇 Step 4 content starts here -->
     <section id="display-area" class="display-area"></section>
-    <!-- 👆👆👆 Step 4 content ends here -->
 
+    <section class="tools">
+      <input id="filename-input" type="text" placeholder="Name your plan" />
+      <textarea id="notes-input" placeholder="Add optional notes…"></textarea>
+      <button id="download-button">Download Preview</button>
+    </section>
   </main>
 
   <script src="script.js"></script>
