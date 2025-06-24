@@ -48,7 +48,7 @@ const loadLayout = async (layout) => {
   const displayArea = document.getElementById("display-area");
   displayArea.innerHTML = "";
   try {
-    const res = await fetch(`svg/${layout}.svg`);
+    const res = await fetch(`resources/SVG/${layout}.svg`);
     const svgText = await res.text();
     displayArea.innerHTML = svgText;
     document.querySelector("svg").classList.add("svg-display");
