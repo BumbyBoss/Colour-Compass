@@ -1,0 +1,59 @@
+/* FILE: style.css */
+/* LOCATION: Colour-Compass/style.css */
+
+body {
+  font-family: "Merriweather", serif;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  color: #222;
+  text-align: center;
+}
+
+header {
+  padding: 1rem 0 0.5rem 0;
+}
+
+.logo {
+  height: 80px;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0 0 1rem 0;
+}
+
+.instructions {
+  margin: 1rem auto;
+  font-size: 1rem;
+  max-width: 600px;
+  padding: 0 1rem;
+}
+
+.selector {
+  margin: 1rem auto 2rem auto;
+}
+
+select {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#display-area {
+  margin: 0 auto 2rem auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 300px;
+}
+
+.color-box {
+  width: 90px;
+  height: 90px;
+  background-color: #ccc;
+  border: 1px solid #999;
+}
