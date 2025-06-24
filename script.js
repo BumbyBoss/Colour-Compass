@@ -1,35 +1,22 @@
-// FILE: script.js
-// LOCATION: Colour-Compass/script.js
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const layoutSelect = document.getElementById("layout-select");
   const displayArea = document.getElementById("display-area");
 
-  layoutSelect.addEventListener("change", function () {
+  layoutSelect.addEventListener("change", () => {
     const layout = layoutSelect.value;
-    renderLayout(layout);
+    displayArea.innerHTML = ""; // Clear previous SVG
+
+    if (!layout) return;
+
+    const svgPath = `svgs/${layout}.svg`;
+    const objectElement = document.createElement("object");
+    objectElement.setAttribute("type", "image/svg+xml");
+    objectElement.setAttribute("data", svgPath);
+    objectElement.setAttribute("class", "svg-display");
+
+    displayArea.appendChild(objectElement);
   });
 
-  function renderLayout(layout) {
-    displayArea.innerHTML = "";
-
-    if (layout === "grid") {
-      for (let i = 0; i < 9; i++) {
-        const box = document.createElement("div");
-        box.classList.add("color-box");
-        displayArea.appendChild(box);
-      }
-    } else {
-      const svgPath = `svgs/${layout}.svg`; // e.g., svgs/diaper.svg
-      const embed = document.createElement("object");
-      embed.data = svgPath;
-      embed.type = "image/svg+xml";
-      embed.width = "300";
-      embed.height = "300";
-      displayArea.appendChild(embed);
-    }
-  }
-
-  // Load default view
-  renderLayout(layoutSelect.value);
+  // Optional: trigger default load on page init
+  layoutSelect.dispatchEvent(new Event("change"));
 });
