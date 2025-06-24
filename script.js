@@ -2,100 +2,106 @@
 // LOCATION: Colour-Compass/script.js
 
 let swatches = [];
-let currentLayout = 'grid';
-let selectedColours = Array(9).fill(null);
+let selectedColours = {};
 
-// Dynamically load the selected layout SVG
+const layoutMap = {
+  grid: [
+    "zone-1", "zone-2", "zone-3",
+    "zone-4", "zone-5", "zone-6",
+    "zone-7", "zone-8", "zone-9"
+  ],
+  diaper: ["AZBody", "AZLeftTab", "AZRightTab"],
+  kidpants: ["AZBody", "AZWaistband", "AZCuffs"],
+  kidcrops: ["AZBody", "AZWaistband", "AZCuffs"],
+  kidshorts: ["AZBody", "AZWaistband"],
+  sweater: ["AZBody", "AZLeftSleeve", "AZRightSleeve", "AZCuffs", "AZBottomBand", "AZNeckband", "AZPatch"]
+};
+
 const loadLayout = async (layout) => {
-  const displayArea = document.getElementById('display-area');
-  displayArea.innerHTML = '';
+  const displayArea = document.getElementById("display-area");
+  displayArea.innerHTML = "";
   try {
     const res = await fetch(`svg/${layout}.svg`);
     const svgText = await res.text();
     displayArea.innerHTML = svgText;
-    applyColours();
+    document.querySelector("svg").classList.add("svg-display");
+    applyColours(layout);
   } catch (err) {
     displayArea.innerHTML = `<p>Error loading layout: ${layout}</p>`;
   }
 };
 
-// Load swatch data from swatches.json
 const loadSwatches = async () => {
   try {
-    const res = await fetch('swatches.json');
+    const res = await fetch("swatches.json");
     swatches = await res.json();
   } catch (err) {
-    console.error('Failed to load swatches:', err);
+    console.error("Failed to load swatches:", err);
   }
 };
 
-// Populate selectors for each swatch area
-const createSelectors = () => {
-  const selectorSection = document.querySelector('.selector');
-  // Remove old selectors if re-rendering
-  document.querySelectorAll('.swatch-row').forEach(row => row.remove());
+const createSelectors = (layout) => {
+  const selectorSection = document.querySelector(".selector");
+  document.querySelectorAll(".swatch-row").forEach(row => row.remove());
 
-  for (let i = 0; i < selectedColours.length; i++) {
-    const row = document.createElement('div');
-    row.className = 'swatch-row';
+  const zones = layoutMap[layout] || [];
+  selectedColours = {};
 
-    const label = document.createElement('label');
-    label.textContent = `Select #${i + 1}`;
+  zones.forEach((zoneId, index) => {
+    const row = document.createElement("div");
+    row.className = "swatch-row";
+
+    const label = document.createElement("label");
+    label.textContent = `Swatch ${index + 1} – ${zoneId}`;
     row.appendChild(label);
 
-    const select = document.createElement('select');
-    select.dataset.index = i;
+    const select = document.createElement("select");
+    select.dataset.zone = zoneId;
 
     swatches.forEach(swatch => {
-      const option = document.createElement('option');
-      option.value = swatch.svgPatternId || '';
-      option.textContent = swatch.name || 'Choose a colour';
-      if (swatch.imageUrl) {
-        option.dataset.image = swatch.imageUrl;
-      }
+      const option = document.createElement("option");
+      option.value = swatch.svgPatternId || "";
+      option.textContent = swatch.name || "Choose a colour";
       select.appendChild(option);
     });
 
-    select.addEventListener('change', handleSelection);
+    select.addEventListener("change", (e) => {
+      selectedColours[zoneId] = e.target.value;
+      applyColours(layout);
+    });
+
     row.appendChild(select);
     selectorSection.appendChild(row);
-  }
+  });
 };
 
-// Fill the SVG with colours
-const applyColours = () => {
-  const svg = document.querySelector('svg');
+const applyColours = (layout) => {
+  const svg = document.querySelector("svg");
   if (!svg) return;
 
-  selectedColours.forEach((colourId, i) => {
-    if (!colourId) return;
+  const zones = layoutMap[layout] || [];
 
-    const area = svg.getElementById(`zone-${i + 1}`);
-    if (area) {
-      area.setAttribute('fill', `url(#${colourId})`);
+  zones.forEach(zoneId => {
+    const part = svg.getElementById(zoneId);
+    const patternId = selectedColours[zoneId];
+    if (part && patternId) {
+      part.setAttribute("fill", `url(#${patternId})`);
     }
   });
 };
 
-// When user selects a colour
-const handleSelection = (e) => {
-  const index = +e.target.dataset.index;
-  const selectedId = e.target.value;
-  selectedColours[index] = selectedId;
-  applyColours();
-};
-
-// Layout selector change
-document.getElementById('layout-select').addEventListener('change', async (e) => {
-  currentLayout = e.target.value;
-  selectedColours = Array(9).fill(null);
-  await loadLayout(currentLayout);
-  createSelectors();
+// Event: layout changed
+const layoutSelect = document.getElementById("layout-select");
+layoutSelect.addEventListener("change", async (e) => {
+  const layout = e.target.value;
+  await loadLayout(layout);
+  createSelectors(layout);
 });
 
-// Initial load
+// Initial setup
 (async () => {
   await loadSwatches();
-  await loadLayout(currentLayout);
-  createSelectors();
+  const defaultLayout = layoutSelect.value;
+  await loadLayout(defaultLayout);
+  createSelectors(defaultLayout);
 })();
