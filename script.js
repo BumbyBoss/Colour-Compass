@@ -4,28 +4,61 @@
 let swatches = [];
 let selectedColours = {};
 
-const layoutMap = {
-  grid: [
-    "zone-1", "zone-2", "zone-3",
-    "zone-4", "zone-5", "zone-6",
-    "zone-7", "zone-8", "zone-9"
-  ],
-  diaper: ["AZBody", "AZLeftTab", "AZRightTab"],
-  kidpants: ["AZBody", "AZWaistband", "AZCuffs"],
-  kidcrops: ["AZBody", "AZWaistband", "AZCuffs"],
-  kidshorts: ["AZBody", "AZWaistband"],
-  sweater: ["AZBody", "AZLeftSleeve", "AZRightSleeve", "AZCuffs", "AZBottomBand", "AZNeckband", "AZPatch"]
+const structure = {
+  grid: [], // last priority
+  diaper: ["Abrazo", "TraditionalDC", "Brief"],
+  kidcrops: ["HemmedCrop", "HemmedEuroCrop", "DigsCrop", "CuffedCrop", "CuffedEuroCrop", "RuffleCrop"],
+  kidpants: ["HaremPants", "LeggingPants", "JoggersPants", "RufflePants", "HemmedPants", "CuffedPants", "EuroHemmedPants", "EuroCuffedPants", "EuroSweatPants", "BritchesPants", "FootiesPants", "BootcutPants"],
+  kidshorts: ["HemmedShorts", "CuffedShorts", "RuffledShorts", "BloomerShorts", "Skirtie"],
+  sweater: [
+    "CampfireSweater", "CardiganSweater", "CocoonSweater", "CrewNeckSweater",
+    "HalfZipSweater", "HenleySweater", "ShawlNeckSweater", "SheepyHugSweater",
+    "QuarterSweater", "Vest"
+  ]
+};
+
+const mergedZones = (svg, groupId) => {
+  const zoneGroups = {
+    Cuff: ["Cuff", "LeftCuff", "RightCuff"],
+    Sleeve: ["LeftSleeve", "RightSleeve"],
+    SidePanel: ["LeftSidePanel", "RightSidePanel"],
+    Leg: ["LeftLeg", "RightLeg"],
+    Foot: ["LeftFoot", "RightFoot"],
+    Tab: ["LeftTab", "RightTab"]
+  };
+  const all = Array.from(svg.querySelectorAll(`#${groupId} *`));
+  const final = [];
+  const used = new Set();
+
+  all.forEach(el => {
+    const id = el.id;
+    if (!id || used.has(id)) return;
+
+    for (let label in zoneGroups) {
+      const group = zoneGroups[label];
+      if (group.some(g => id.includes(g))) {
+        if (!used.has(label)) {
+          final.push(label);
+          used.add(label);
+        }
+        used.add(id);
+        return;
+      }
+    }
+    final.push(id);
+    used.add(id);
+  });
+  return final;
 };
 
 const loadLayout = async (layout) => {
   const displayArea = document.getElementById("display-area");
   displayArea.innerHTML = "";
   try {
-    const res = await fetch(`svg/${layout}.svg`);
+    const res = await fetch(`resources/SVG/${layout}.svg`);
     const svgText = await res.text();
     displayArea.innerHTML = svgText;
     document.querySelector("svg").classList.add("svg-display");
-    applyColours(layout);
   } catch (err) {
     displayArea.innerHTML = `<p>Error loading layout: ${layout}</p>`;
   }
@@ -40,11 +73,9 @@ const loadSwatches = async () => {
   }
 };
 
-const createSelectors = (layout) => {
+const createSelectors = (zones, groupId) => {
   const selectorSection = document.querySelector(".selector");
   document.querySelectorAll(".swatch-row").forEach(row => row.remove());
-
-  const zones = layoutMap[layout] || [];
   selectedColours = {};
 
   zones.forEach((zoneId, index) => {
@@ -67,7 +98,7 @@ const createSelectors = (layout) => {
 
     select.addEventListener("change", (e) => {
       selectedColours[zoneId] = e.target.value;
-      applyColours(layout);
+      applyColours(groupId);
     });
 
     row.appendChild(select);
@@ -75,26 +106,48 @@ const createSelectors = (layout) => {
   });
 };
 
-const applyColours = (layout) => {
+const applyColours = (groupId) => {
   const svg = document.querySelector("svg");
   if (!svg) return;
 
-  const zones = layoutMap[layout] || [];
-
-  zones.forEach(zoneId => {
-    const part = svg.getElementById(zoneId);
-    const patternId = selectedColours[zoneId];
-    if (part && patternId) {
-      part.setAttribute("fill", `url(#${patternId})`);
+  Object.entries(selectedColours).forEach(([zoneId, patternId]) => {
+    const zone = svg.getElementById(zoneId);
+    if (zone && patternId) {
+      zone.setAttribute("fill", `url(#${patternId})`);
     }
   });
 };
 
-const layoutSelect = document.getElementById("layout-select");
-layoutSelect.addEventListener("change", async (e) => {
+const categorySelect = document.getElementById("layout-select");
+const groupSelect = document.getElementById("group-select");
+
+categorySelect.addEventListener("change", async (e) => {
   const layout = e.target.value;
+  groupSelect.innerHTML = "<option disabled selected>Select a Style</option>";
+  document.querySelector(".selector").innerHTML = "";
+
   await loadLayout(layout);
-  createSelectors(layout);
+  const svg = document.querySelector("svg");
+  if (!svg || !structure[layout]) return;
+
+  structure[layout].forEach(groupId => {
+    if (svg.getElementById(groupId)) {
+      const option = document.createElement("option");
+      option.value = groupId;
+      option.textContent = groupId.replace(/([A-Z])/g, ' $1').trim();
+      groupSelect.appendChild(option);
+    }
+  });
+
+  groupSelect.style.display = "block";
+});
+
+groupSelect.addEventListener("change", () => {
+  const selectedGroup = groupSelect.value;
+  const svg = document.querySelector("svg");
+  if (!svg) return;
+  const zones = mergedZones(svg, selectedGroup);
+  createSelectors(zones, selectedGroup);
 });
 
 // Download button logic (as PNG)
@@ -136,7 +189,4 @@ downloadButton.addEventListener("click", () => {
 
 (async () => {
   await loadSwatches();
-  const defaultLayout = layoutSelect.value;
-  await loadLayout(defaultLayout);
-  createSelectors(defaultLayout);
 })();
