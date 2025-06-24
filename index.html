@@ -1,54 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bumby Wool - Colour Compass</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bumby Wool Colour Compass</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0 auto;
+      padding: 2rem;
+      max-width: 700px;
+    }
+    img.logo {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    select, input, textarea {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.5rem;
+      margin: 0.5rem auto;
+      display: block;
+    }
+    #display-area {
+      margin: 1.5rem auto;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <img src="logo/BumbyWoolLogo.png" alt="Bumby Wool" class="logo">
-    <h1>Colour Compass</h1>
-  </header>
+  <!-- ✅ Logo path fixed -->
+  <img class="logo" src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" />
 
-  <main>
-    <section class="instructions">
-      <p><strong>Welcome to the Bumby Colour Compass!</strong><br>
-      Explore our current colours and preview how they look together on different garment styles. Use the dropdown to select a layout and start customizing.</p>
-    </section>
+  <h1>Colour Compass</h1>
 
-    <section class="selector">
-      <label for="layout-select">Choose a layout:</label>
-      <select id="layout-select">
-        <option value="">-- Select Garment Type --</option>
-        <option value="diaper">Diaper Cover</option>
-        <option value="kidcrops">Kid Crops</option>
-        <option value="kidshorts">Kid Shorts</option>
-        <option value="kidpants">Kid Pants</option>
-        <option value="sweater">Sweater</option>
-        <option value="grid">3x3 Colour Grid</option>
-      </select>
+  <p><strong>Welcome to the Bumby Colour Compass!</strong><br/>
+  Explore our current colours and preview how they look together on different garment styles. Use the dropdown to select a layout and start customizing.</p>
 
-      <label for="group-select" style="display:none;">Choose a Style:</label>
-      <select id="group-select" style="display:none;"></select>
+  <!-- Layout dropdown -->
+  <label for="layout-select"><strong>Choose a layout:</strong></label>
+  <select id="layout-select" onchange="handleLayoutChange(this.value)">
+    <option value="">-- Select Garment Type --</option>
+    <option value="diaper">Diaper Cover</option>
+    <option value="kidcrops">Kid Crops</option>
+    <option value="kidshorts">Kid Shorts</option>
+    <option value="kidpants">Kid Pants</option>
+    <option value="sweater">Sweater</option>
+  </select>
 
-      <div id="zones-container"></div>
-    </section>
+  <!-- Style selector -->
+  <div id="style-select-container"></div>
 
-    <div id="display-area"></div>
+  <!-- Colour selector -->
+  <div id="colour-select-container"></div>
 
-    <section class="export">
-      <label for="filename-input">Name your Colour Compass:</label>
-      <input type="text" id="filename-input" placeholder="My Custom Look">
+  <!-- Name and notes -->
+  <label for="custom-name"><strong>Name your Colour Compass:</strong></label>
+  <input id="custom-name" type="text" placeholder="My Custom Look" />
 
-      <label for="notes-input">Add notes (optional):</label>
-      <textarea id="notes-input" placeholder="Save your notes to u pload to your woolboard to help place an order!"></textarea>
+  <label for="custom-notes"><strong>Add notes (optional):</strong></label>
+  <textarea id="custom-notes" placeholder="Ex: Match cuffs with hat colour"></textarea>
 
-      <button id="download-button">Download Image</button>
-    </section>
-  </main>
+  <!-- Display area -->
+  <div id="display-area"></div>
 
+  <!-- Download -->
+  <button onclick="downloadPNG()">Download PNG</button>
+
+  <!-- Scripts -->
   <script src="script.js"></script>
 </body>
 </html>
