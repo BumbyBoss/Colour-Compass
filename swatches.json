@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Choose a colour"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy CocoFrutti",
+    "svgPatternId": "ComfyCocoFrutti",
+    "patternId": { "fill": "url(#ComfyCocoFrutti)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfyCocoFrutti.jpg"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy Coleus",
+    "svgPatternId": "ComfyColeus",
+    "patternId": { "fill": "url(#ComfyColeus)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfyColeus.jpg"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy CrushedBerriesMelange",
+    "svgPatternId": "ComfyCrushedBerriesMelange",
+    "patternId": { "fill": "url(#ComfyCrushedBerriesMelange)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfyCrushedBerriesMelange.jpg"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy Marmalade",
+    "svgPatternId": "ComfyMarmalade",
+    "patternId": { "fill": "url(#ComfyMarmalade)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfyMarmalade.jpg"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy Mauve-You",
+    "svgPatternId": "ComfyMauve-You",
+    "patternId": { "fill": "url(#ComfyMauve-You)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfyMauve-You.jpg"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy Papillon",
+    "svgPatternId": "ComfyPapillon",
+    "patternId": { "fill": "url(#ComfyPapillon)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfyPapillon.jpg"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy River",
+    "svgPatternId": "ComfyRiver",
+    "patternId": { "fill": "url(#ComfyRiver)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfyRiver.jpg"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy Striped Wooly Lambs Ear",
+    "svgPatternId": "ComfyStripedWoolyLambsEar",
+    "patternId": { "fill": "url(#ComfyStripedWoolyLambsEar)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfyStripedWoolyLambsEar.jpg"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy Summer-Spritz",
+    "svgPatternId": "ComfySummer-Spritz",
+    "patternId": { "fill": "url(#ComfySummer-Spritz)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfySummer-Spritz.jpg"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy Under the Neon Lights",
+    "svgPatternId": "ComfyUndertheNeonLights",
+    "patternId": { "fill": "url(#ComfyUndertheNeonLights)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfyUndertheNeonLights.jpg"
+  },
+  {
+    "type": "pattern",
+    "name": "Comfy Viburnum",
+    "svgPatternId": "ComfyViburnum",
+    "patternId": { "fill": "url(#ComfyViburnum)" },
+    "imageUrl": "https://www.bumbywool.com/wp-content/uploads/2025/06/BuilderComfyViburnum.jpg"
+  }
+]
