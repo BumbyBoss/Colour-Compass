@@ -1,13 +1,13 @@
 <!-- FILE: index.html -->
-<!-- LOCATION: colour_compass/index.html -->
+<!-- LOCATION: Colour-Compass/index.html -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bumby Wool - Colour Compass</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bumby Wool – Colour Compass</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -17,7 +17,7 @@
 
   <main>
     <section class="instructions">
-      <p>Select a garment or 3x3 grid to begin planning your colours. First selection will fill all zones. You can edit each one after. Hover/tap swatches to see names.</p>
+      <p>Select a garment or 3x3 grid to begin planning your colours. First selection will fill all zones. You can edit each one after. Hover/tap swatches to preview options.</p>
     </section>
 
     <section class="selector">
@@ -31,13 +31,10 @@
       </select>
     </section>
 
-    <section id="visual-area">
-      <!-- SVG or Grid will be inserted here -->
-    </section>
+    <!-- 👇👇👇 Step 4 content starts here -->
+    <section id="display-area" class="display-area"></section>
+    <!-- 👆👆👆 Step 4 content ends here -->
 
-    <section id="swatch-picker">
-      <!-- Swatches will be loaded here dynamically -->
-    </section>
   </main>
 
   <script src="script.js"></script>
