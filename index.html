@@ -1,0 +1,45 @@
+<!-- FILE: index.html -->
+<!-- LOCATION: colour_compass/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bumby Wool - Colour Compass</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="logo/LOGO-5-PNG-TRANSPARENT.png" alt="Bumby Wool Logo" class="logo">
+    <h1>Colour Compass</h1>
+  </header>
+
+  <main>
+    <section class="instructions">
+      <p>Select a garment or 3x3 grid to begin planning your colours. First selection will fill all zones. You can edit each one after. Hover/tap swatches to see names.</p>
+    </section>
+
+    <section class="selector">
+      <label for="layout-select">Choose a layout:</label>
+      <select id="layout-select">
+        <option value="grid">3x3 Colour Grid</option>
+        <option value="diaper">Diaper Cover</option>
+        <option value="pants">Bottoms</option>
+        <option value="tshirt">T-Shirt</option>
+        <option value="sweater">Sweater</option>
+      </select>
+    </section>
+
+    <section id="visual-area">
+      <!-- SVG or Grid will be inserted here -->
+    </section>
+
+    <section id="swatch-picker">
+      <!-- Swatches will be loaded here dynamically -->
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
