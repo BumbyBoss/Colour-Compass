@@ -90,7 +90,6 @@ const applyColours = (layout) => {
   });
 };
 
-// Event: layout changed
 const layoutSelect = document.getElementById("layout-select");
 layoutSelect.addEventListener("change", async (e) => {
   const layout = e.target.value;
@@ -98,7 +97,46 @@ layoutSelect.addEventListener("change", async (e) => {
   createSelectors(layout);
 });
 
-// Initial setup
+// Download button logic (as PNG)
+const downloadButton = document.getElementById("download-button");
+downloadButton.addEventListener("click", () => {
+  const svgEl = document.querySelector("svg");
+  if (!svgEl) return;
+
+  const nameInput = document.getElementById("filename-input");
+  const notesInput = document.getElementById("notes-input");
+
+  const name = nameInput?.value.trim() || "bumby-colour-compass";
+  const notes = notesInput?.value.trim() || "";
+  const filename = notes ? `${name} - ${notes}` : name;
+
+  const clone = svgEl.cloneNode(true);
+  clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  const svgData = new XMLSerializer().serializeToString(clone);
+  const canvas = document.createElement("canvas");
+  const bbox = svgEl.getBBox();
+  canvas.width = bbox.width;
+  canvas.height = bbox.height;
+  const ctx = canvas.getContext("2d");
+  const img = new Image();
+  const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(svgBlob);
+
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0);
+    URL.revokeObjectURL(url);
+    const pngUrl = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.download = `${filename}.png`;
+    link.href = pngUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  img.src = url;
+});
+
 (async () => {
   await loadSwatches();
   const defaultLayout = layoutSelect.value;
