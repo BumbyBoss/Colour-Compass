@@ -105,10 +105,7 @@ downloadButton.addEventListener("click", () => {
 
   const nameInput = document.getElementById("filename-input");
   const notesInput = document.getElementById("notes-input");
-
-  const name = nameInput?.value.trim() || "bumby-colour-compass";
-  const notes = notesInput?.value.trim() || "";
-  const filename = notes ? `${name} - ${notes}` : name;
+  const customName = nameInput && nameInput.value.trim() !== "" ? nameInput.value.trim() : "bumby-colour-compass";
 
   const clone = svgEl.cloneNode(true);
   clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -127,7 +124,7 @@ downloadButton.addEventListener("click", () => {
     URL.revokeObjectURL(url);
     const pngUrl = canvas.toDataURL("image/png");
     const link = document.createElement("a");
-    link.download = `${filename}.png`;
+    link.download = `${customName}.png`;
     link.href = pngUrl;
     document.body.appendChild(link);
     link.click();
