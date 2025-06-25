@@ -8,47 +8,43 @@
 </head>
 <body>
   <header>
-    <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo"/>
+    <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo" />
     <h1>Bumby Colour Compass</h1>
+    <p>Explore our current colours and preview how they look together on different garment styles.</p>
   </header>
 
   <main>
-    <section id="layoutControls">
-      <label for="layout">Choose a layout:</label>
-      <select id="layout">
+    <div class="controls">
+      <label for="layout-select">Choose a layout:</label>
+      <select id="layout-select">
         <option value="">-- Select Garment Type --</option>
         <option value="diaper">Diaper Cover</option>
+        <option value="kidpants">Kid Pants</option>
         <option value="kidcrops">Kid Crops</option>
         <option value="kidshorts">Kid Shorts</option>
-        <option value="kidpants">Kid Pants</option>
         <option value="sweater">Sweater</option>
       </select>
 
-      <label for="style">Choose a Style:</label>
-      <select id="style">
+      <label for="style-select">Choose a Style:</label>
+      <select id="style-select">
         <option value="">-- Select Style --</option>
       </select>
-    </section>
+    </div>
 
-    <!-- SVG Display -->
     <section id="display-area"></section>
 
-    <!-- Colour Picker -->
-    <section id="swatchControls">
-      <h2>Choose a Colour</h2>
-      <div id="swatchList"></div>
-    </section>
+    <h2>Choose a Colour</h2>
+    <div id="swatchList"></div>
 
-    <!-- Naming & Notes -->
-    <section>
-      <label for="compassName">Name your Colour Compass:</label>
-      <input type="text" id="compassName" placeholder="My Custom Look" />
-
+    <div class="form-row">
+      <label for="compass-name">Name your Colour Compass:</label>
+      <input type="text" id="compass-name" placeholder="My Custom Look" />
+      
       <label for="notes">Add notes (optional):</label>
       <textarea id="notes" placeholder="Ex: Match cuffs with hat colour"></textarea>
 
-      <button id="download">Download PNG</button>
-    </section>
+      <button id="download-btn">Download PNG</button>
+    </div>
   </main>
 
   <script src="script.js"></script>
