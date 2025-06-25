@@ -1,74 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bumby Wool Colour Compass</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0 auto;
-      padding: 2rem;
-      max-width: 700px;
-    }
-    img.logo {
-      height: 60px;
-      margin-bottom: 10px;
-    }
-    select, input, textarea {
-      width: 100%;
-      max-width: 400px;
-      padding: 0.5rem;
-      margin: 0.5rem auto;
-      display: block;
-    }
-    #display-area {
-      margin: 1.5rem auto;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bumby Colour Compass</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- ✅ Logo path fixed -->
-  <img class="logo" src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" />
+  <header>
+    <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo">
+    <h1>Colour Compass</h1>
+  </header>
 
-  <h1>Colour Compass</h1>
+  <main>
+    <section id="svgContainer">
+      <!-- SVG will be injected here -->
+    </section>
+  </main>
 
-  <p><strong>Welcome to the Bumby Colour Compass!</strong><br/>
-  Explore our current colours and preview how they look together on different garment styles. Use the dropdown to select a layout and start customizing.</p>
-
-  <!-- Layout dropdown -->
-  <label for="layout-select"><strong>Choose a layout:</strong></label>
-  <select id="layout-select" onchange="handleLayoutChange(this.value)">
-    <option value="">-- Select Garment Type --</option>
-    <option value="diaper">Diaper Cover</option>
-    <option value="kidcrops">Kid Crops</option>
-    <option value="kidshorts">Kid Shorts</option>
-    <option value="kidpants">Kid Pants</option>
-    <option value="sweater">Sweater</option>
-  </select>
-
-  <!-- Style selector -->
-  <div id="style-select-container"></div>
-
-  <!-- Colour selector -->
-  <div id="colour-select-container"></div>
-
-  <!-- Name and notes -->
-  <label for="custom-name"><strong>Name your Colour Compass:</strong></label>
-  <input id="custom-name" type="text" placeholder="My Custom Look" />
-
-  <label for="custom-notes"><strong>Add notes (optional):</strong></label>
-  <textarea id="custom-notes" placeholder="Ex: Match cuffs with hat colour"></textarea>
-
-  <!-- Display area -->
-  <div id="display-area"></div>
-
-  <!-- Download -->
-  <button onclick="downloadPNG()">Download PNG</button>
-
-  <!-- Scripts -->
   <script src="script.js"></script>
 </body>
 </html>
