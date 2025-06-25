@@ -1,0 +1,48 @@
+# Node and package managers
+node_modules/
+dist/
+build/
+*.log
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment files
+.env
+.env.*
+
+# VS Code settings
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# OS and OneDrive stuff
+~$*
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Cache
+.cache/
+.parcel-cache/
+.next/
+out/
+
+# Optional logs and temp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tgz
+
+# GitHub Desktop backup
+*.orig
+
+# macOS metadata
+._*
+
+# Windows shortcuts
+*.lnk
