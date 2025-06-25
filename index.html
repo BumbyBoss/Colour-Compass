@@ -13,13 +13,41 @@
   </header>
 
   <main>
-    <!-- SVG Display -->
-    <section id="svgContainer"></section>
+    <section id="layoutControls">
+      <label for="layout">Choose a layout:</label>
+      <select id="layout">
+        <option value="">-- Select Garment Type --</option>
+        <option value="diaper">Diaper Cover</option>
+        <option value="kidcrops">Kid Crops</option>
+        <option value="kidshorts">Kid Shorts</option>
+        <option value="kidpants">Kid Pants</option>
+        <option value="sweater">Sweater</option>
+      </select>
 
-    <!-- Swatch Controls -->
+      <label for="style">Choose a Style:</label>
+      <select id="style">
+        <option value="">-- Select Style --</option>
+      </select>
+    </section>
+
+    <!-- SVG Display -->
+    <section id="display-area"></section>
+
+    <!-- Colour Picker -->
     <section id="swatchControls">
       <h2>Choose a Colour</h2>
       <div id="swatchList"></div>
+    </section>
+
+    <!-- Naming & Notes -->
+    <section>
+      <label for="compassName">Name your Colour Compass:</label>
+      <input type="text" id="compassName" placeholder="My Custom Look" />
+
+      <label for="notes">Add notes (optional):</label>
+      <textarea id="notes" placeholder="Ex: Match cuffs with hat colour"></textarea>
+
+      <button id="download">Download PNG</button>
     </section>
   </main>
 
