@@ -23,8 +23,12 @@ h1 {
   font-size: 2rem;
 }
 
-#svgContainer {
-  margin: 40px auto;
+#layoutControls {
+  margin: 20px;
+}
+
+#display-area {
+  margin: 30px auto;
   max-width: 800px;
 }
 
@@ -46,4 +50,10 @@ h1 {
   border-radius: 4px;
   border: 2px solid #ccc;
   cursor: pointer;
+}
+
+input, select, textarea {
+  margin: 10px;
+  padding: 5px;
+  font-size: 1rem;
 }
