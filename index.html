@@ -2,23 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bumby Colour Compass</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo"/>
+    <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo" />
     <h1>Bumby Colour Compass</h1>
-    <p>Choose your garment type, then style, then swatches to bring your design to life.</p>
+    <p class="subtitle">Choose your garment type, then style, then swatches to bring your design to life.</p>
   </header>
 
   <main>
     <section class="controls">
-      <label for="layout">Select Garment Type:</label>
+      <label for="layout"><strong>Select Garment Type:</strong></label>
       <select id="layout">
-        <option value="">-- Choose Garment --</option>
-        <option value="grid">3x3 Grid</option>
+        <option value="">-- Select Garment Type --</option>
+        <option value="grid">Grid</option>
         <option value="diaper">Diaper Covers</option>
         <option value="kidpants">Kid Pants</option>
         <option value="kidcrops">Kid Crops</option>
@@ -26,17 +26,27 @@
         <option value="sweater">Sweaters</option>
       </select>
 
-      <label for="style">Select Style:</label>
+      <label for="style"><strong>Select Style:</strong></label>
       <select id="style">
-        <option value="">-- Choose Style --</option>
+        <option value="">-- Select Style --</option>
       </select>
     </section>
 
-    <section id="display-area"></section>
+    <div id="display-area"></div>
 
-    <section class="swatches">
+    <section id="swatchControls">
       <h2>Choose a Colour</h2>
       <div id="swatchList"></div>
+    </section>
+
+    <section class="meta">
+      <label for="lookName">Name your Colour Compass:</label>
+      <input id="lookName" type="text" placeholder="My Custom Look" />
+
+      <label for="notes">Add notes (optional):</label>
+      <textarea id="notes" placeholder="Ex: Match cuffs with hat colour"></textarea>
+
+      <button id="savePNG">Save Screenshot</button>
     </section>
   </main>
 
