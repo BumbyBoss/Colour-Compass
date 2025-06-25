@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bumby Colour Compass</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo">
-    <h1>Colour Compass</h1>
+    <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo"/>
+    <h1>Bumby Colour Compass</h1>
   </header>
 
   <main>
-    <section id="svgContainer">
-      <!-- SVG will be injected here -->
+    <!-- SVG Display -->
+    <section id="svgContainer"></section>
+
+    <!-- Swatch Controls -->
+    <section id="swatchControls">
+      <h2>Choose a Colour</h2>
+      <div id="swatchList"></div>
     </section>
   </main>
 
