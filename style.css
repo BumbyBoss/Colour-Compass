@@ -1,14 +1,14 @@
 body {
-  font-family: sans-serif;
-  text-align: center;
   margin: 0;
-  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  background-color: #ffffff;
 }
 
 header {
-  padding: 20px;
   background-color: #f5f5f5;
-  border-bottom: 1px solid #ccc;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
 }
 
 .logo {
@@ -18,7 +18,32 @@ header {
   height: auto;
 }
 
+h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
 #svgContainer {
   margin: 40px auto;
   max-width: 800px;
+}
+
+#swatchControls {
+  margin-top: 30px;
+}
+
+#swatchList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  border: 2px solid #ccc;
+  cursor: pointer;
 }
