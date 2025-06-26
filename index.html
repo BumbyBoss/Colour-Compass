@@ -10,39 +10,29 @@
   <header>
     <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo" />
     <h1>Bumby Colour Compass</h1>
-    <p class="subtitle">Start with a layout, pick your style, then tap a zone and swatch to begin creating!</p>
   </header>
 
   <main>
-    <div class="selectors">
-      <label for="layout">Choose a layout:</label>
+    <section class="controls">
+      <label for="layout">Garment Type:</label>
       <select id="layout">
-        <option value="">-- Select Garment Type --</option>
-        <option value="grid">Diaper Cover Grid</option>
+        <option value="">-- Select Garment --</option>
+        <option value="diaper">Diaper Cover</option>
+        <option value="grid">3x3 Grid</option>
       </select>
 
-      <label for="style">Choose a style:</label>
+      <label for="style">Style:</label>
       <select id="style">
         <option value="">-- Select Style --</option>
       </select>
-    </div>
+    </section>
 
-    <div id="display-area" class="svg-container"></div>
+    <section id="display-area"></section>
 
-    <h2>Choose a Colour</h2>
-    <div id="swatchList" class="swatch-grid"></div>
-
-    <div class="notes">
-      <label>Name your Colour Compass:
-        <input type="text" id="compassName" placeholder="My Custom Look" />
-      </label>
-
-      <label>Add notes (optional):
-        <textarea id="notes" placeholder="Ex: Match tabs with lining"></textarea>
-      </label>
-
-      <button id="downloadBtn">Save Screenshot</button>
-    </div>
+    <section id="swatchControls">
+      <h2>Select a Colour</h2>
+      <div id="swatchList"></div>
+    </section>
   </main>
 
   <script src="script.js"></script>
