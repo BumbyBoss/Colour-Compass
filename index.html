@@ -8,14 +8,15 @@
 </head>
 <body>
   <header>
-    <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo" />
+    <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo">
     <h1>Bumby Colour Compass</h1>
   </header>
+
   <main>
-    <div class="selector">
+    <div class="dropdowns">
       <label for="layout">Garment Type:</label>
       <select id="layout">
-        <option value="">-- Select Garment --</option>
+        <option value="">-- Select Garment Type --</option>
         <option value="diaper">Diaper Cover</option>
         <option value="grid">3x3 Grid</option>
       </select>
@@ -28,11 +29,10 @@
 
     <div id="display-area"></div>
 
-    <section id="swatchControls">
-      <h2>Select a Colour</h2>
-      <div id="swatchList"></div>
-    </section>
+    <h2>Select a Colour</h2>
+    <div id="swatchList"></div>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
