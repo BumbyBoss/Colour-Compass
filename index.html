@@ -10,44 +10,39 @@
   <header>
     <img src="Resources/BumbyWoolLogo.png" alt="Bumby Wool Logo" class="logo" />
     <h1>Bumby Colour Compass</h1>
-    <p class="subtitle">Choose your garment type, then style, then swatches to bring your design to life.</p>
+    <p class="subtitle">Start with a layout, pick your style, then tap a zone and swatch to begin creating!</p>
   </header>
 
   <main>
-    <section class="controls">
-      <label for="layout"><strong>Select Garment Type:</strong></label>
+    <div class="selectors">
+      <label for="layout">Choose a layout:</label>
       <select id="layout">
         <option value="">-- Select Garment Type --</option>
-        <option value="grid">Grid</option>
-        <option value="diaper">Diaper Covers</option>
-        <option value="kidpants">Kid Pants</option>
-        <option value="kidcrops">Kid Crops</option>
-        <option value="kidshorts">Kid Shorts</option>
-        <option value="sweater">Sweaters</option>
+        <option value="grid">Diaper Cover Grid</option>
       </select>
 
-      <label for="style"><strong>Select Style:</strong></label>
+      <label for="style">Choose a style:</label>
       <select id="style">
         <option value="">-- Select Style --</option>
       </select>
-    </section>
+    </div>
 
-    <div id="display-area"></div>
+    <div id="display-area" class="svg-container"></div>
 
-    <section id="swatchControls">
-      <h2>Choose a Colour</h2>
-      <div id="swatchList"></div>
-    </section>
+    <h2>Choose a Colour</h2>
+    <div id="swatchList" class="swatch-grid"></div>
 
-    <section class="meta">
-      <label for="lookName">Name your Colour Compass:</label>
-      <input id="lookName" type="text" placeholder="My Custom Look" />
+    <div class="notes">
+      <label>Name your Colour Compass:
+        <input type="text" id="compassName" placeholder="My Custom Look" />
+      </label>
 
-      <label for="notes">Add notes (optional):</label>
-      <textarea id="notes" placeholder="Ex: Match cuffs with hat colour"></textarea>
+      <label>Add notes (optional):
+        <textarea id="notes" placeholder="Ex: Match tabs with lining"></textarea>
+      </label>
 
-      <button id="savePNG">Save Screenshot</button>
-    </section>
+      <button id="downloadBtn">Save Screenshot</button>
+    </div>
   </main>
 
   <script src="script.js"></script>
