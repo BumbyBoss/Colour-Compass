@@ -1,120 +1,98 @@
-/* FILE: style.css */
-
+/* General Styles */
 body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background-color: #ffffff;
-  color: #333;
-  text-align: center;
+  background: #ffffff;
+  color: #222;
 }
 
 header {
-  background-color: #f5f5f5;
-  padding: 20px;
+  background-color: #f3f3f3;
+  padding: 2rem 1rem;
+  text-align: center;
   border-bottom: 1px solid #ddd;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 10px;
-  max-width: 250px;
-  height: auto;
+header .logo {
+  width: 150px;
+  max-width: 80vw;
+  margin-bottom: 0.5rem;
 }
 
 h1 {
-  margin: 0;
   font-size: 2rem;
+  margin: 0;
+  color: #2c2c2c;
 }
 
 main {
-  padding: 20px;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
-.selector {
-  margin: 20px auto;
-  max-width: 800px;
-}
-
-.swatch-row {
-  margin-bottom: 1em;
+.dropdowns {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
 }
 
 select {
-  padding: 8px;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  width: 100%;
-  max-width: 300px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 220px;
 }
 
 #display-area {
-  max-width: 800px;
-  margin: 20px auto;
+  margin: 2rem auto;
+  text-align: center;
 }
 
-.svg-display {
-  width: 100%;
+svg.svg-display {
+  max-width: 100%;
   height: auto;
-  display: block;
-  margin: 0 auto;
 }
 
-#swatchControls {
-  margin-top: 30px;
+h2 {
+  text-align: center;
+  margin-top: 3rem;
+  color: #2c2c2c;
 }
 
 #swatchList {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  padding: 20px;
+  gap: 0.5rem;
+  padding: 0 1rem;
 }
 
 .swatch {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
   background-size: cover;
   background-position: center;
-  border: 2px solid #ccc;
-  cursor: pointer;
-  border-radius: 6px;
   transition: transform 0.2s ease;
 }
 
 .swatch:hover {
   transform: scale(1.1);
-  border-color: #999;
+  border-color: #888;
 }
 
-#controls {
-  margin-top: 30px;
-}
-
-#filename-input, #notes-input {
-  margin: 10px;
-  padding: 8px;
-  font-size: 1rem;
-  width: 90%;
-  max-width: 400px;
-}
-
-button {
-  background-color: #a89d91;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #8a8076;
+.swatch:active {
+  transform: scale(0.95);
+  border-color: #444;
 }
